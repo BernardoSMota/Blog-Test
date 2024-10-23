@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR.parent / 'data' / 'web'
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'blog',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -118,12 +119,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = DATA_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = DATA_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Tinymce
+
+TINYMCE_DEFAULT_CONFIG = {
+    'menubar': True,  # Desativar a barra de menu
+    'plugins': 'advlist autolink lists link image charmap preview hr anchor pagebreak code',  # Plugins úteis para blogs
+    'toolbar': 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',  # Botões na barra de ferramentas
+    'content_css': '/static/css/content.css',  # CSS customizado para o conteúdo do editor
+    'statusbar': True,  # Exibir a barra de status
+    'relative_urls': False,  # Manter URLs absolutas
+    'remove_script_host': False,  # Manter o host nos URLs
+    'convert_urls': True,  # Converter URLs
+    'image_advtab': True,  # Ativar guia avançada para imagens
+    'link_assume_https': True,  # Assumir HTTPS para links
+    'autosave_ask_before_unload': False,  # Desativar confirmação ao sair
+}
