@@ -1,9 +1,9 @@
 <header>
     <div class="container header-container">
-        <a class="logo" href="#">LOGO</a>
+        <a class="logo" href="{% url "blog:index" %}">LOGO</a>
 
         <ul class="ul-links header-item">
-            <li><a href="#">Home</a></li>
+            <li><a href="{% url "blog:index" %}">Home</a></li>
             <li><a href="#">Posts</a></li>
             <li><a href="#">About</a></li>
         </ul>

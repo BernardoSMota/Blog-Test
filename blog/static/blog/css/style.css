@@ -11,6 +11,18 @@
     --max-width: 180rem;
 }
 
+h1{
+    font-size: 3.2rem;
+}
+
+h2{
+    font-size: 2.4rem;
+}
+
+h3{
+    font-size: 1.8rem;
+}
+
 html{
     font-size: 62.5%;
 }
@@ -140,10 +152,6 @@ main{
 
 }
 
-.post-tag:first-child{
-    margin-left: 1rem;
-}
-
 /* FOOTER CONTENT */
 
 footer{
@@ -165,4 +173,35 @@ footer{
 .post-background{
     margin: 0 auto;
     border-radius: 1rem
+}
+
+.infos{
+    /* background-color: tomato; */
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.infos span{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    margin-bottom: 1rem;
+}
+
+.post-tags{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.post-tags li:not(:last-child):not(:first-child){
+    margin: 0 1rem 0 0;
+}
+
+.post-tags i{
+    margin-right: 0.5rem;
 }
