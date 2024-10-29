@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Post, Tag
+from blog.models import Post, Tag, Category
 # Register your models here.
 
 @admin.register(Post)
@@ -17,3 +17,8 @@ class TitleAdmin(admin.ModelAdmin):
     search_fields = 'title',
     prepopulated_fields = {'slug': ('title',)}
     
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = 'title', 'slug',
+    search_fields = 'title',
+    prepopulated_fields = {'slug': ('title',)}

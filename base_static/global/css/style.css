@@ -71,11 +71,11 @@ header a{
     color: rgb(var(--black));
 }
 
-header a:hover:not(.new-post-button){
+header a:hover:not(.highlight-button){
     font-weight: 500;
 }
 
-.new-post-button{
+.highlight-button{
     background-color: rgb(var(--color-05));
     border-radius: 5rem;
     padding: 1rem 2rem;
@@ -83,7 +83,7 @@ header a:hover:not(.new-post-button){
     transition: all 0.3s ease;
 }
 
-.new-post-button:hover{
+.highlight-button:hover{
     background-color: rgba(var(--color-05), 0.7);
 }
 
@@ -93,8 +93,14 @@ header a:hover:not(.new-post-button){
     cursor: pointer;
 }
 
+.user-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
 .user-info, .logo{
-    width: 20.5rem;
+    width: 25rem;
 }
 
 /* MAIN CONTENT STYLE */
@@ -147,7 +153,7 @@ main{
     color: rgb(var(--black), 0.7);
 }
 
-.post-tags{
+.post-tags, .post-categories{
     align-self: center;
 
 }

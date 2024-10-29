@@ -5,10 +5,12 @@
     <p class="summary post-info">
         {{ post.summary }}
     </p>
-    <p class="post-tags post-info">
-        Tags:
-        <a href="#" class="post-tag">Tag-01</a>
-        <a href="#" class="post-tag">Tag-02</a>
-        <a href="#" class="post-tag">Tag-03</a>
+
+    {% if post.category %}
+    <p class="post-categories post-info">
+        Category:
+        <a href="{% url "blog:category" post.category.slug %}" class='post-category'>{{ post.category.title }}</a>
     </p>
+    {% endif %}
+
 </div>

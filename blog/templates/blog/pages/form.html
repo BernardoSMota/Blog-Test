@@ -1,0 +1,20 @@
+{% include "global/partials/_head.html" %}
+</head>
+<body>
+
+    {% include "global/partials/_header.html" %}
+
+    <main>
+        <div class="container form-content">
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </main>
+
+    {% include "global/partials/_footer.html" %}
+
+</body>
+</html>

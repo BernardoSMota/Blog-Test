@@ -6,7 +6,7 @@ from PIL import Image
 
 
 class Tag(models.Model):
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=64)
     slug = models.SlugField(unique=True, blank=True, null=True, default=None)
     
     def __str__(self):
@@ -18,9 +18,25 @@ class Tag(models.Model):
             
         return super().save(*args, **kwargs)
         
-
-
-class Post(models.Model):
+class Category(models.Model):
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+    
+    
+    title = models.CharField(max_length=64)
+    slug = models.SlugField(unique=True, blank=True, null=True, default=None)
+    
+    def __str__(self):
+        return self.title
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugfy.slugfy_new(self.title)
+            
+        return super().save(*args, **kwargs)
+    
+class Post(models.Model):   
     def __init__(self, *args, **kwargs):
         super(Post, self).__init__(*args, **kwargs)
         self.imagem_antiga = self.cover
@@ -35,6 +51,7 @@ class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
         return self.title
