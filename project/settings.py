@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'blogUser',
     'tinymce',
+    'django_select2',
 ]
 
 MIDDLEWARE = [

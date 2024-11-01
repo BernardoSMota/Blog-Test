@@ -8,7 +8,7 @@
         <div class="container post-content">
             <h1 class="inner-post-title" > {{post.title}} </h1>
             <h2 class="inner-post-summary" > {{ post.summary }} </h2>
-            {% if post.cover_in_post_content %}
+            {% if post.cover_in_post_content and post.cover %}
                 <div class="cover-image">
                     <img class="post-background" src="{{ post.cover.url }}" alt="">
                 </div>
@@ -16,7 +16,7 @@
 
             <div class="infos">
                 <span>
-                    <p><a href="{% url "blog:creator" post.owner.pk %}"> 
+                    <p><a href="{% url "blog:creator" post.owner.id %}"> 
                         <i class="fa-solid fa-user"></i>
                         {% if post.owner.first_name %} 
                             {{ post.owner.first_name }} {{ post.owner.last_name }} 

@@ -10,7 +10,7 @@
 
         <div class="user-info header-item">
             {% if user.is_superuser %}
-                <a class="highlight-button" href="#">Novo post</a>
+                <a class="highlight-button" href="{% url "blog:create_post" %}">Novo post</a>
             {% endif %}
 
             {% if not user.is_authenticated %}
