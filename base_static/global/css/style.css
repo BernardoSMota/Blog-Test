@@ -41,6 +41,7 @@ body{
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 1rem;
+    position: relative;
 }
 
 
@@ -321,9 +322,6 @@ form{
     opacity: 0 !important;
 }
 
-
-
-
 /* ERROR */
 
 .error{
@@ -340,14 +338,6 @@ form{
     color: tomato;
 }
 
-
-
-
-
-
-
-
-
 .button{
     border: none;
     border-radius: 5rem;
@@ -362,10 +352,44 @@ form{
     background-color: rgb(var(--color-05));
 }
 
-
-
-
 .back-button{
     color: rgb(var(--black));
-    
+}
+
+/* UPDATE AND DELETE BUTTONS */
+
+.UD-buttons{
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.UD-buttons *{
+    color: rgb(var(--black));
+    cursor: pointer;
+}
+
+.UD-buttons .confirm {
+    content: 'Confirma?';
+    background-color: rgb(var(--color-02));
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    margin-right: 0.5rem;
+    color: white;
+    text-decoration: none;
+    width: 0;
+    transform: scaleX(0);     
+    opacity: 0;               
+    transform-origin: right;  
+    transition: all 0.3s ease;
+}
+
+.UD-buttons .confirm.mostrar {
+    width: auto;
+    transform: scaleX(1);      
+    opacity: 1;
+    margin-left: 3rem;
 }

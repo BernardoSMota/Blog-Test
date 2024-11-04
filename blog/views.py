@@ -3,7 +3,7 @@ from blog.models import Post, Tag, Category
 from django.shortcuts import get_object_or_404
 from blog.forms import PostForm
 from django.http import Http404
-
+from utils.createModels import create_category, create_tag
 
 def index(request):
     posts = Post.objects.all().filter(published=True)
@@ -65,28 +65,12 @@ def post_form_view(request):
     if request.method == "POST":
         new_request = request.POST.copy()
         
-        # Creating non existing tags and changing the request
-        tag_id_list = []
-        tags = new_request.getlist('tags', [])        
-        for tag in tags:
-            if not tag.isnumeric():
-                tag, created = Tag.objects.get_or_create(title=tag) 
-                tag_id_list.append(str(tag.id))
-            else:
-                tag_id_list.append(str(tag))
+        
+        tag_id_list = create_tag(new_request) # Creating non existing tags
+        category = create_category(new_request) # Creating a non existing category
         
         new_request.setlist('tags', tag_id_list)
-        
-        # Creating a non existing category and changing the request
-        category = new_request.get('category')
-        if not category.isnumeric():
-            category, created = Category.objects.get_or_create(title=category)
-            category_id = [str(category.id)]
-            new_request.setlist('category', category_id)       
-        else:
-            new_request.setlist('category', category)       
-        
-        
+        new_request.setlist('category', category)       
         
         form = PostForm(new_request, request.FILES)
         user = request.user
@@ -102,3 +86,42 @@ def post_form_view(request):
 
 
     return render(request, 'global/pages/form.html', {'form': form})
+
+
+def post_edit_form(request, slug):
+    if not request.user.is_superuser:
+        raise Http404
+    
+    post = get_object_or_404(Post, slug=slug)
+    form = PostForm(instance=post) 
+    
+    if request.method == 'POST':        
+        new_request = request.POST.copy()
+        
+        tag_id_list = create_tag(new_request) # Creating non existing tags
+        category = create_category(new_request) # Creating a non existing category
+        
+        new_request.setlist('tags', tag_id_list)
+        new_request.setlist('category', category)
+
+            
+        form = Post(new_request, request.FILES, instance=post)
+        
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save() 
+            for tag in tag_id_list:
+                post.tags.add(tag)
+                
+    return render(request, 'global/pages/form.html', {'form': form})
+
+
+def delete_post(request, slug):
+    if not request.user.is_superuser:
+        raise Http404
+
+    post = get_object_or_404(Post, slug=slug)
+    post.delete()
+    return redirect('blog:index')
+
+    

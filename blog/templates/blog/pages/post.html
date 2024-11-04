@@ -1,7 +1,6 @@
 {% include "global/partials/_head.html" %}
 </head>
 <body>
-
     {% include "global/partials/_header.html" %}
 
     <main style='margin-top:0 ;'>
@@ -51,8 +50,26 @@
             
 
             <div class="post-text"> {{post.content | safe}} </div>
+
+            {% if user.is_superuser %}
+                <div class="UD-buttons">
+                    <a  class='edit' href="{% url "blog:edit_post" post.slug %}"><i class="fa-solid fa-pen fa-xl"></i></a>
+                    <a class="confirm" href="{% url "blog:delete_post" post.slug %}">Confirma?</a>
+                    <p class='delete' onclick='toggleConfirmacao()'><i class="fa-solid fa-trash fa-xl"></i></p>
+                </div>
+            {% endif %}
     </main>
 
     {% include "global/partials/_footer.html" %}
+
+
+
+
+    <script>
+        function toggleConfirmacao() {
+            const lixeira = document.querySelector('.confirm');
+            lixeira.classList.toggle('mostrar');        
+        }
+    </script>
 </body>
 </html>
