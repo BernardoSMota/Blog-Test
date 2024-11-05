@@ -24,12 +24,15 @@ from PIL import Image # type: ignore
 #     return new_image
 
 
-def resize_image(image_django, new_width=800, optimize=True, qualiy= 70):
+def resize_image(image_django, new_width=800, new_height=None, optimize=True, qualiy= 70):
     image_path = image_django.path
     img = Image.open(image_path)
 
-    new_height = round(new_width * 1080 / 1920)
+    if not new_height:
+        new_height = round(new_width * 1080 / 1920)     
+        
     new_size = (new_width, new_height)
+        
     
     img = img.resize(new_size, Image.LANCZOS)
 

@@ -324,13 +324,14 @@ form{
 
 /* ERROR */
 
-.error{
-    margin-left: 1.5rem;
+.error, .help-text{
+    margin-left: 1.2rem;
     margin-top: 0.5rem;
+    font-size: 1.4rem;
 }
 
 
-.error ul{
+.error ul, .help-text ul{
     list-style: none;
 }
 

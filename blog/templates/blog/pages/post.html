@@ -15,12 +15,12 @@
 
             <div class="infos">
                 <span>
-                    <p><a href="{% url "blog:creator" post.owner.id %}"> 
+                    <p><a href="{% url "blog:creator" post.creator.id %}"> 
                         <i class="fa-solid fa-user"></i>
-                        {% if post.owner.first_name %} 
-                            {{ post.owner.first_name }} {{ post.owner.last_name }} 
+                        {% if post.creator.first_name %} 
+                            {{ post.creator.first_name }} {{ post.creator.last_name }} 
                         {% else %} 
-                            {{ post.owner }} 
+                            {{ post.creator }} 
                         {% endif %}
                     </a></p>
 

@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from blog.views import index, post, creator, tags, category, post_form_view, post_edit_form, delete_post
 
 app_name = 'blog'

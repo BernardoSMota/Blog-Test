@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from blog.models import Post, Tag, Category
+from blog.models import Post
 from django.shortcuts import get_object_or_404
 from blog.forms import PostForm
 from django.http import Http404
@@ -77,7 +77,7 @@ def post_form_view(request):
         
         if form.is_valid():
             post = form.save(commit=False)
-            post.owner = user
+            post.creator = user
             post.save() 
             for tag in tag_id_list:
                 post.tags.add(tag)

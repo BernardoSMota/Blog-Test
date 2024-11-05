@@ -3,6 +3,7 @@ from tinymce.models import HTMLField
 from django.contrib.auth.models import User
 from utils import slugfy, resizeImage
 from PIL import Image
+from django.conf import settings
 
 
 class Tag(models.Model):
@@ -48,7 +49,7 @@ class Post(models.Model):
     cover_in_post_content = models.BooleanField(default=True, help_text='A capa somente será exibida dentro do post caso essa opção esteja marcada')
     content = HTMLField()
     published = models.BooleanField(default=True)
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)

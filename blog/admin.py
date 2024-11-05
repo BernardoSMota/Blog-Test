@@ -4,10 +4,10 @@ from blog.models import Post, Tag, Category
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = 'title', 'summary', 'owner', 'published',
+    list_display = 'title', 'summary', 'creator', 'published',
     list_editable = 'published',
-    search_fields = 'title', 'owner',
-    # readonly_fields = 'owner', 'created_at', # VOLTAR AO NORMAL DEPOIS
+    search_fields = 'title', 'creator',
+    # readonly_fields = 'creator', 'created_at', # VOLTAR AO NORMAL DEPOIS
     prepopulated_fields = {'slug': ('title',)}
     autocomplete_fields = 'tags',
     

@@ -1,3 +1,5 @@
+from blog.models import Tag, Category
+
 def create_tag(request):
     tag_id_list = []
     tags = request.getlist('tags', [])        

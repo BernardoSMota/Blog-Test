@@ -150,3 +150,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'link_assume_https': True,  # Assumir HTTPS para links
     'autosave_ask_before_unload': False,  # Desativar confirmação ao sair
 }
+
+# Modelo para autenticar user
+AUTH_USER_MODEL = 'blogUser.CustomUser'
