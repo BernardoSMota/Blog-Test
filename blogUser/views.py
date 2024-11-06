@@ -23,3 +23,6 @@ def newUser(request):
         
         
     return render(request, 'global/pages/form.html', context={'form': form} )
+
+def userInfo(request):
+    return render(request, 'blogUser/pages/user.html')

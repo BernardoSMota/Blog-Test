@@ -24,7 +24,7 @@ def post(request, slug):
 
 
 def creator(request, id):
-    posts = Post.objects.all().filter(published=True, pk=id)
+    posts = Post.objects.all().filter(published=True, creator__pk=id)
     if not posts:
         raise Http404
     

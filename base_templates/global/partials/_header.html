@@ -4,7 +4,9 @@
 
         <ul class="ul-links header-item">
             <li><a href="{% url "blog:index" %}">Home</a></li>
-            <li><a href="#">Posts</a></li>
+            {% if user.is_superuser %}
+                <li><a href="{% url "blog:creator" user.id %}">Posts {{user.id}}</a></li>
+            {% endif %}
             <li><a href="#">About</a></li>
         </ul>
 
@@ -17,7 +19,7 @@
                 <a href="#">Login</a>
                 <a href="{% url "blogUser:create" %}" class='highlight-button'>Cadastre-se</a>
             {% else %}
-                <img class='profile-picture' src="{{ user.profile_picture.url }}" alt="User profile picture">
+                <a class="pfp-a" href="{% url "blogUser:info" %}"><img class='profile-picture' src="{{ user.profile_picture.url }}" alt="User profile picture"></a>
             {% endif %}
             
         </div>
