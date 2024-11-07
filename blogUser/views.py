@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from blogUser.forms import customUserForm, editUserForm, passwordEditForm
+from django.contrib.auth import logout
 from django.core.cache import cache
 
 
@@ -55,3 +56,8 @@ def editUserPassword(request):
             return redirect('blog:index')
 
     return render(request, 'global/pages/form.html', context={'form': form} )
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('blog:index')
