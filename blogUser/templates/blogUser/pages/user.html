@@ -8,7 +8,7 @@
         <div class="container">
             <div class="personal-data">
                 <img src="{{ user.profile_picture.url }}" alt="">
-                <a href="#">alterar dados</a>
+                <span class='links'><a href="{% url "blogUser:edit" %}">alterar dados</a> <a href="{% url "blogUser:editPassword" %}">alterar senha</a></span>
                 <div class="text-info">
                     <span class='info not-change'>
                         <p class='label'>Usuário</p>

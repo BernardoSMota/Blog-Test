@@ -15,7 +15,13 @@
                     <div class="form-group">
                         
                         <label>{{ field.label }}</label>
-                        {{ field }}
+                        {% if field.name == "profile_picture" and form.instance.profile_picture %}
+                            <img class='user-pfp-edit' src="{{ form.instance.profile_picture.url }}" alt="Imagem Atual" style="max-width: 150px;">
+                            <input type="file" name="{{ field.name }}">                 
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+
                         {% if field.errors %}
                             <div class="error">{{ field.errors }}</div>
                         {% endif %}
