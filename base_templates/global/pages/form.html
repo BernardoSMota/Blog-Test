@@ -31,8 +31,14 @@
                         {% endif %}
 
                     </div>
-
-                {% endfor %}
+                    
+                    {% endfor %}
+                    
+                    {% if user_form == 'login' %}
+                        <a href="{% url "blogUser:create" %}">Criar conta</a>
+                    {% elif user_form == 'create' %}
+                        <a href="{% url "blogUser:login" %}">Fazer login</a>
+                    {% endif %}
 
             <button class='button submit-button' type="submit">Enviar</button>
             </form>

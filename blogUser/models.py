@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
         self.imagem_antiga = self.profile_picture
     
     super_user_code = models.CharField(max_length=5, blank=True, help_text='Preencha este campo caso tenha uma chave para se tornar um superusuário', verbose_name='Código de superusuário')
-    profile_picture = models.ImageField(upload_to='users/%Y/%m/', verbose_name='Foto de perfil', help_text='Escolha uma foto quadrada para melhor resolução')
+    profile_picture = models.ImageField(upload_to='users/%Y/%m/', verbose_name='Foto de perfil', help_text='Escolha uma foto quadrada para melhor resolução', blank=True, null=True, default='default/user-no-img.jpg')
     
     def __str__(self):
         return self.username

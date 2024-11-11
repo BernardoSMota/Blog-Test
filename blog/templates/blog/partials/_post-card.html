@@ -2,8 +2,8 @@
     {% if post.cover %}
         <a href="{% url "blog:post" post.slug %}"><img class="post-image" src='{{ post.cover.url }}' alt=""></a>
     {% else %}
-        <div class="no-image-post" ><a href="{% url "blog:post" post.slug %}">NO IMAGE</a></div>
-        
+        <a href="/media/default/post-no-img.jpg"><img class="post-image" src='{{ post.cover.url }}' alt=""></a>
+
     {% endif %}
     <a href="{% url "blog:post" post.slug %}"><p class="post-title post-info">{{ post.title }}</p></a>
 

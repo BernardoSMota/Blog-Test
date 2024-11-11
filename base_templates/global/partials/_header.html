@@ -16,10 +16,14 @@
             {% endif %}
 
             {% if not user.is_authenticated %}
-                <a href="#">Login</a>
+                <a href="{% url "blogUser:login" %}">Login</a>
                 <a href="{% url "blogUser:create" %}" class='highlight-button'>Cadastre-se</a>
             {% else %}
-                <a class="pfp-a" href="{% url "blogUser:info" %}"><img class='profile-picture' src="{{ user.profile_picture.url }}" alt="User profile picture"></a>
+                {% if user.profile_picture %}
+                    <a class="pfp-a" href="{% url "blogUser:info" %}"><img class='profile-picture' src="{{ user.profile_picture.url}}" alt="User profile picture"></a>
+                {% else %}
+                    <a class="pfp-a" href="{% url "blogUser:info" %}"><img class='profile-picture' src="/media/default/user-no-img.jpg" alt="User profile picture"></a>
+                {% endif %}
             {% endif %}
             
         </div>
