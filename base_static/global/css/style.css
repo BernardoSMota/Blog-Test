@@ -186,6 +186,37 @@ main{
     text-decoration: underline;
 }
 
+.post-like{
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.post-like a{
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-like i{
+    margin-right: 0.5rem;
+}
+
+.post-like i:hover{
+    color: gray;
+}
+
+.post-like i.liked{
+    color: #ed4956;
+}
+
+.post-like span{
+    text-decoration: underline;
+    text-decoration-thickness: 0.2rem;
+    text-underline-offset: 0.5rem;
+}
+
 /* FOOTER CONTENT */
 
 footer{

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from blog.models import Post
 from django.shortcuts import get_object_or_404
 from blog.forms import PostForm
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from utils.createModels import create_category, create_tag
 
 def index(request):
@@ -125,3 +125,23 @@ def delete_post(request, slug):
     return redirect('blog:index')
 
     
+def like_post(request, id):
+    try:
+        if request.method == 'POST':
+                post = get_object_or_404(Post.objects.filter(id=id, published=True))
+
+                if request.user in post.likes.all():
+                    post.likes.remove(request.user)
+                    liked = False
+                else:
+                    post.likes.add(request.user)
+                    liked = True
+
+                response = {
+                    'liked': liked,
+                    'like_count': post.likes.count()
+                }
+                return JsonResponse(response)
+    
+    except Exception as e:
+        print(e)

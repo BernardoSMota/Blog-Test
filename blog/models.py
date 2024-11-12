@@ -53,16 +53,17 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='post_like')
+    
     
     def __str__(self):
         return self.title
+
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugfy.slugfy_new(self.title)
             
-        
-        current_cover_name = str(self.cover.name)
         super().save(*args, **kwargs)  # Salva a instância normalmente primeiro
 
         if self.cover:
@@ -70,4 +71,4 @@ class Post(models.Model):
                 resizeImage.resize_image(self.cover)
             
         return super().save(*args, **kwargs)
-        
+    

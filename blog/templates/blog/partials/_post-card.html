@@ -11,11 +11,60 @@
         {{ post.summary }}
     </p>
 
-    {% if post.category %}
-    <p class="post-categories post-info">
-        Category:
-        <a href="{% url "blog:category" post.category.slug %}" class='post-category'>{{ post.category.title }}</a>
-    </p>
+    {% if user in post.likes.all %}
+        <div class="post-like">
+            <a href="{% url "blog:like" post.id %}" class='like-button' data-url="{% url 'blog:like' post.id %}">
+                <i class="fa-solid fa-heart fa-xl liked"></i> <span class='likes-count'> {{post.likes.count}} </span>
+            </a>
+        </div>
+
+    {% else %}
+        <div class="post-like">
+            <a href="{% url "blog:like" post.id %}" class='like-button' data-url="{% url 'blog:like' post.id %}">
+                <i class="fa-regular fa-heart fa-xl"></i> <span class='likes-count'> {{post.likes.count}} </span>
+            </a>    
+        </div>
     {% endif %}
 
+
 </div>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            "X-CSRFToken": '{{ csrf_token }}'
+        }
+    });
+    
+    $(document).ready(function() {
+        $('.like-button').click(function(event) {
+            event.preventDefault(); // Evita o comportamento padrão do link
+            
+            var button = $(this);
+            var url = button.data('url'); // Pega a URL do botão
+            var icon = button.find('i'); // Encontra o ícone dentro do botão
+    
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    // Atualiza o estado do ícone
+                    if (response.liked) {
+                        icon.removeClass('fa-regular').addClass('fa-solid liked');
+                    } else {
+                        icon.removeClass('fa-solid liked').addClass('fa-regular');
+                    }
+    
+                    // Atualiza a contagem de likes
+                    button.find('.likes-count').text(response.like_count);
+                },
+                error: function() {
+                    alert('Ocorreu um erro. Tente novamente.');
+                }
+            });
+        });
+    });
+</script>

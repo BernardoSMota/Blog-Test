@@ -1,10 +1,10 @@
 from django.contrib import admin
-from blog.models import Post, Tag, Category
+from blog.models import Post, Tag, Category#, Likes
 # Register your models here.
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = 'title', 'summary', 'creator', 'published',
+    list_display = 'id','title', 'summary', 'creator', 'published',
     list_editable = 'published',
     search_fields = 'title', 'creator',
     # readonly_fields = 'creator', 'created_at', # VOLTAR AO NORMAL DEPOIS

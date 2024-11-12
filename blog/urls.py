@@ -1,5 +1,5 @@
 from django.urls import path
-from blog.views import index, post, creator, tags, category, post_form_view, post_edit_form, delete_post
+from blog.views import index, post, creator, tags, category, post_form_view, post_edit_form, delete_post, like_post
 
 app_name = 'blog'
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('post/create', post_form_view, name='create_post'), 
     path('post/<slug:slug>/edit/', post_edit_form, name='edit_post'), 
     path('post/<slug:slug>/delete/', delete_post, name='delete_post'), 
+    path('post/like/<int:id>/', like_post, name='like'), 
 ]
