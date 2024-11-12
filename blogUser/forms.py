@@ -18,6 +18,14 @@ class customUserForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs={'placeholder': 'Confirme sua senha'}),
         label="Confirmar Senha",
     )
+    
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if CustomUser.objects.filter(email=email).exists():
+            self.add_error('email', ValidationError('Email já cadastrado'))
+        return email
+
 
 
     def clean_password1(self):
@@ -53,10 +61,11 @@ class editUserForm(forms.ModelForm):
 
     
     def clean_email(self):
+        current_email = self.instance.email
         email = self.cleaned_data.get('email')
-        if CustomUser.objects.filter(email=email).exists():
-            self.add_error('email', ValidationError('Email já cadastrado'))
-            
+        
+        if CustomUser.objects.filter(email=email).exists() and current_email != email:
+            self.add_error('email', ValidationError('Email já cadastrado'))            
         return email
     
 class passwordEditForm(forms.ModelForm):

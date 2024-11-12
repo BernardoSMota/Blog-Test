@@ -35,7 +35,8 @@
             "X-CSRFToken": '{{ csrf_token }}'
         }
     });
-    
+
+
     $(document).ready(function() {
         $('.like-button').click(function(event) {
             event.preventDefault(); // Evita o comportamento padrão do link
@@ -51,15 +52,19 @@
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function(response) {
-                    // Atualiza o estado do ícone
-                    if (response.liked) {
-                        icon.removeClass('fa-regular').addClass('fa-solid liked');
+                    if (response.redirect_to_login) {
+                        window.location.href = response.login_url; // Redireciona para a página de login
                     } else {
-                        icon.removeClass('fa-solid liked').addClass('fa-regular');
+                        // Atualiza o estado do ícone
+                        if (response.liked) {
+                            icon.removeClass('fa-regular').addClass('fa-solid liked');
+                        } else {
+                            icon.removeClass('fa-solid liked').addClass('fa-regular');
+                        }
+                
+                        // Atualiza a contagem de likes
+                        button.find('.likes-count').text(response.like_count);
                     }
-    
-                    // Atualiza a contagem de likes
-                    button.find('.likes-count').text(response.like_count);
                 },
                 error: function() {
                     alert('Ocorreu um erro. Tente novamente.');

@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from django.shortcuts import render, redirect
 from blog.models import Post
 from django.shortcuts import get_object_or_404
@@ -124,24 +126,25 @@ def delete_post(request, slug):
     post.delete()
     return redirect('blog:index')
 
-    
+
 def like_post(request, id):
-    try:
-        if request.method == 'POST':
-                post = get_object_or_404(Post.objects.filter(id=id, published=True))
+    if not request.user.is_authenticated:
+        login_url = reverse('blogUser:login')
+        return JsonResponse({'redirect_to_login': True, 'login_url': login_url}) 
 
-                if request.user in post.likes.all():
-                    post.likes.remove(request.user)
-                    liked = False
-                else:
-                    post.likes.add(request.user)
-                    liked = True
+    if request.method == 'POST':
+            post = get_object_or_404(Post.objects.filter(id=id, published=True))
 
-                response = {
-                    'liked': liked,
-                    'like_count': post.likes.count()
-                }
-                return JsonResponse(response)
-    
-    except Exception as e:
-        print(e)
+            if request.user in post.likes.all():
+                post.likes.remove(request.user)
+                liked = False
+            else:
+                post.likes.add(request.user)
+                liked = True
+
+            response = {
+                'liked': liked,
+                'like_count': post.likes.count(),
+                'loged': request.user.is_authenticated,
+            }
+            return JsonResponse(response)         

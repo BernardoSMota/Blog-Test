@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,14 +79,20 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+DBNAME= config('DBNAME')
+DBUSER= config('DBUSER')
+DBPASSWORD= config('DBPASSWORD')
+DBHOST= config('DBHOST')
+DBPORT= config('DBPORT')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogDB',        # Nome do banco de dados criado no DBeaver
-        'USER': 'postgres',     # Nome do usuário criado no DBeaver
-        'PASSWORD': '123',        # Senha do usuário
-        'HOST': 'localhost',        # Normalmente é 'localhost'
-        'PORT': '5432',             # Porta padrão do PostgreSQL
+        'NAME': DBNAME,
+        'USER': DBUSER,
+        'PASSWORD': DBPASSWORD,
+        'HOST': DBHOST,
+        'PORT': DBPORT,
     }
 }
 
