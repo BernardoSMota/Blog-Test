@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'OPTIONS': {
-            'timeout': 20,  # Tempo limite de 20 segundos
-        },
-
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blogDB',        # Nome do banco de dados criado no DBeaver
+        'USER': 'postgres',     # Nome do usuário criado no DBeaver
+        'PASSWORD': '123',        # Senha do usuário
+        'HOST': 'localhost',        # Normalmente é 'localhost'
+        'PORT': '5432',             # Porta padrão do PostgreSQL
     }
 }
 
